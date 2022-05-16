@@ -1,0 +1,12 @@
+<h2>Cryptocurrency Prices by Market Cap</h2>
+<input class="center-block" type="search" placeholder="Search" aria-label="Search"
+       (keyup)="search(searchText.value)" #searchText>
+<button (click)="reload()">Return</button>
+<app-search-coins *ngIf="filteredCoins" [coinsMarketData]="coinsMarketData$ | async"></app-search-coins>
+<app-coins-market-data *ngIf="!filteredCoins" class="coins-list"
+                       [coinsMarketData]="coinsMarketData$ | async"></app-coins-market-data>
+<div class="pagination" *ngIf="!filteredCoins">
+  <button (click)="getPreviousPage()">&laquo;</button>
+  Page {{page}}
+  <button (click)="getNextPage()">&raquo;</button>
+</div>

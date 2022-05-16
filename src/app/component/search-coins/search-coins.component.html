@@ -1,0 +1,16 @@
+<table id="coins">
+  <thead>
+  <tr>
+    <th>#</th>
+    <th>Coin</th>
+    <th>Market cap rank</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of coinsMarketData; let i = index;">
+    <td>{{ i + 1 }}</td>
+    <td>{{ item.name }}</td>
+    <td>{{ item.market_cap_rank }}</td>
+  </tr>
+  </tbody>
+</table>
