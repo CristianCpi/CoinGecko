@@ -10,6 +10,7 @@ import {CoinsMarketDataComponent} from './component/coins-market-data/coins-mark
 import {coinsMarketDataReducer} from "./app-state/coins.reducer";
 import {SearchCoinsComponent} from './component/search-coins/search-coins.component';
 import {MatSortModule} from '@angular/material/sort';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {MatSortModule} from '@angular/material/sort';
     HttpClientModule,
     MatSortModule,
     RouterModule,
+    BrowserAnimationsModule,
     StoreModule.forRoot({coinsMarketData: coinsMarketDataReducer}, {}),
   ],
   providers: [],

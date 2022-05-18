@@ -28,7 +28,6 @@ export class AppComponent implements OnInit {
 
   public search(term: string): void {
     term = term.toLowerCase();
-    console.log(term);
     if (term != "") {
       this.coinGeckoService.getFilteredCoinMarketData(term).subscribe(coinsMarketData => {
         this.filteredCoins = true;
