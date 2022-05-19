@@ -1,4 +1,4 @@
-import {Component, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Sort} from "@angular/material/sort";
 
 import {CoinMarket} from "../../models/CoinMarket";
@@ -8,9 +8,10 @@ import {CoinMarket} from "../../models/CoinMarket";
   templateUrl: './coins-market-data.component.html',
   styleUrls: ['./coins-market-data.component.scss', '../../app.component.scss']
 })
-export class CoinsMarketDataComponent {
+export class CoinsMarketDataComponent{
 
   @Input() coinsMarketData: CoinMarket[] | null = [];
+  @Input() pageCount: number = 1;
 
   public sortData(sort: Sort): void {
     if (this.coinsMarketData != undefined) {

@@ -15,6 +15,7 @@ export class AppComponent implements OnInit {
 
   public coinsMarketData$ = this.store.select(selectCoinMarketData);
   public page: number = 1;
+  public pageCount: number = 1;
   public filteredCoins: boolean = false;
 
   constructor(private coinGeckoService: CoinGeckoService,
@@ -44,11 +45,13 @@ export class AppComponent implements OnInit {
     } else {
       this.page--;
     }
+    this.pageCount -= 100;
     this.getAllCoinsMarketData(this.page);
   }
 
   public getNextPage(): void {
     this.page++;
+    this.pageCount += 100;
     this.getAllCoinsMarketData(this.page);
   }
 

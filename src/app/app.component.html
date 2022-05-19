@@ -4,7 +4,8 @@
 <button (click)="reload()">Return</button>
 <app-search-coins *ngIf="filteredCoins" [coinsMarketData]="coinsMarketData$ | async"></app-search-coins>
 <app-coins-market-data *ngIf="!filteredCoins" class="coins-list"
-                       [coinsMarketData]="coinsMarketData$ | async"></app-coins-market-data>
+                       [coinsMarketData]="coinsMarketData$ | async"
+                        [pageCount]="pageCount"></app-coins-market-data>
 <div class="pagination" *ngIf="!filteredCoins">
   <button (click)="getPreviousPage()">&laquo;</button>
   Page {{page}}
