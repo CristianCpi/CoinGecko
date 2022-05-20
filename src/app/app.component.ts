@@ -19,8 +19,7 @@ export class AppComponent implements OnInit {
   public filteredCoins: boolean = false;
 
   constructor(private coinGeckoService: CoinGeckoService,
-              private store: Store,
-              private router: Router) {
+              private store: Store) {
   }
 
   public ngOnInit(): void {

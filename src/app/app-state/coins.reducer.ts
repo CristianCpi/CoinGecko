@@ -6,6 +6,5 @@ export const initialState: CoinMarket[] = [];
 
 export const coinsMarketDataReducer = createReducer(
   initialState,
-  // on(filterCoinMarketDataList, (state, { coinsMarketData }) => coinsMarketData),
   on(retrieveCoinMarketDataList, (state, { coinsMarketData }) => coinsMarketData),
 );

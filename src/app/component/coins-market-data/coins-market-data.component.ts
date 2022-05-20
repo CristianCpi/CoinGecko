@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input} from '@angular/core';
 import {Sort} from "@angular/material/sort";
 
 import {CoinMarket} from "../../models/CoinMarket";
