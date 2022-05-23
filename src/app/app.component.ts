@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Router} from "@angular/router";
 import {Store} from "@ngrx/store";
 
 import {CoinGeckoService} from "./services/coin-gecko.service";
 import {retrieveCoinMarketDataList} from "./app-state/coins.actions";
 import {selectCoinMarketData} from "./app-state/coins.selectors";
+import {Subject, takeUntil} from "rxjs";
 
 @Component({
   selector: 'app-root',
@@ -17,6 +17,7 @@ export class AppComponent implements OnInit {
   public page: number = 1;
   public pageCount: number = 1;
   public filteredCoins: boolean = false;
+  private ngUnsubscribe = new Subject();
 
   constructor(private coinGeckoService: CoinGeckoService,
               private store: Store) {
@@ -29,9 +30,11 @@ export class AppComponent implements OnInit {
   public search(term: string): void {
     term = term.toLowerCase();
     if (term != "") {
-      this.coinGeckoService.getFilteredCoinMarketData(term).subscribe(coinsMarketData => {
+      this.coinGeckoService.getFilteredCoinMarketData(term).pipe(takeUntil(this.ngUnsubscribe)).subscribe(coinsMarketData => {
         this.filteredCoins = true;
         this.store.dispatch(retrieveCoinMarketDataList({coinsMarketData}));
+        this.ngUnsubscribe.next(coinsMarketData);
+        this.ngUnsubscribe.complete();
       });
     } else {
       this.getAllCoinsMarketData();
@@ -55,12 +58,15 @@ export class AppComponent implements OnInit {
   }
 
   public getAllCoinsMarketData(page: number = 0): void {
-    this.coinGeckoService.getAllCoins(page).subscribe((coinsMarketData) => {
+    this.coinGeckoService.getAllCoins(page).pipe(takeUntil(this.ngUnsubscribe)).subscribe((coinsMarketData) => {
       this.store.dispatch(retrieveCoinMarketDataList({coinsMarketData}));
+      this.ngUnsubscribe.next(coinsMarketData);
+      this.ngUnsubscribe.complete();
     });
   }
 
   public reload(): void {
     window.location.reload()
   }
+
 }
